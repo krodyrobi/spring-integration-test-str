@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,7 +26,6 @@ public class SomeControllerTest {
     public @Rule WireMockRule wireMockRule = new WireMockRule(9999);
 
     private @MockBean Config config;
-    private @MockBean HttpServletRequest request;
 
     private WebTestClient webClient;
 
@@ -79,7 +77,7 @@ public class SomeControllerTest {
                 .expectStatus()
                 .isNotFound()
                 .expectBody(String.class)
-                .isEqualTo("Http://localhost:8080/test 404 MOCK");
+                .isEqualTo("http://localhost:8080/test 404 MOCK");
 
         wireMockRule.verify(getRequestedFor(urlMatching("/200")));
     }
