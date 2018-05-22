@@ -37,6 +37,7 @@ public class SomeControllerTest {
         webClient = WebTestClient
                 .bindToController(controller)
                 .controllerAdvice(exceptionHandler)
+//                .argumentResolvers()
                 .build();
 
         when(config.getUrl()).thenReturn(baseUrl);
@@ -77,7 +78,7 @@ public class SomeControllerTest {
                 .expectStatus()
                 .isNotFound()
                 .expectBody(String.class)
-                .isEqualTo("http://localhost:8080/test 404 MOCK");
+                .isEqualTo("/test 404 MOCK");
 
         wireMockRule.verify(getRequestedFor(urlMatching("/200")));
     }
